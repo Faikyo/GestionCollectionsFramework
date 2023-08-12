@@ -1,0 +1,26 @@
+<form *ngIf="collection !== undefined" class="mx-3">
+  <div *ngIf="!newCollection">
+    <h1>Edit collection :</h1>
+  </div>
+  <div *ngIf="newCollection">
+    <h1>Ajouter collection :</h1>
+  </div>
+
+  <mat-form-field appearance="outline" class="my-3 d-block">
+    <mat-label>Title:</mat-label>
+    <input matInput #titre id="theTitle" type="text" [value]="collection.titre" required="true">
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="my-3 d-block">
+    <mat-label>Description:</mat-label>
+    <textarea matInput #description cols="100" rows="4" [textContent]="collection.description"></textarea>
+  </mat-form-field>
+
+  <div *ngIf="!newCollection" class="d-block">
+    <button mat-raised-button color="primary" [disabled]="newCollection" (click)="update(titre.value, description.value)">Update</button>
+    <button mat-raised-button color="accent" (click)="goToCollections()">Cancel</button>
+  </div>
+  <div *ngIf="newCollection">
+    <button mat-raised-button color="primary" [disabled]="!newCollection" (click)="add(titre.value, description.value)">Ajouter</button>
+    <button mat-raised-button color="accent" (click)="goToCollections()">Cancel</button>
+  </div>
+</form>

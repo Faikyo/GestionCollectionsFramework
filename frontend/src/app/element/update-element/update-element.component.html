@@ -1,0 +1,47 @@
+<form class="mx-3" *ngIf="element!==undefined">
+  <div *ngIf="!newElement">
+    <h1>Edit collection :</h1>
+  </div>
+  <div *ngIf="newElement">
+    <h1>Ajouter element :</h1>
+  </div>
+
+  <mat-form-field appearance="outline" class="my-3">
+    <mat-label>Designation</mat-label>
+    <textarea matInput #designation id="designation" [textContent]="element.designation" required></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="my-3">
+    <mat-label>Description</mat-label>
+    <textarea matInput #description id="description" [textContent]="element.description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="my-3">
+    <mat-label>Commentaire</mat-label>
+    <textarea matInput #commentaire id="commentaire" [textContent]="element.commentaire"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="my-3">
+    <mat-label>Valeur</mat-label>
+    <input matInput #valeur id="valeur" type="number" [value]="element.valeur">
+  </mat-form-field>
+
+  <div *ngIf="newElement">
+    <mat-form-field appearance="outline" class="my-3">
+      <mat-label>Collection</mat-label>
+      <mat-select #collection id="collection" name="collection" required>
+        <mat-option *ngFor="let collection of collections" [value]="collection.id">
+          {{ collection.titre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="my-3" (click)="add(valeur.value, description.value,designation.value, commentaire.value,collection.value)">Ajouter</button>
+    <button mat-raised-button color="accent" class="my-3" (click)="goToElements()">Cancel</button>
+  </div>
+
+  <div *ngIf="!newElement" class="d-block">
+    <button mat-raised-button color="primary" (click)="update(valeur.value, description.value,designation.value, commentaire.value)">Update</button>
+    <button mat-raised-button color="accent" (click)="goToElements()">Cancel</button>
+  </div>
+
+</form>

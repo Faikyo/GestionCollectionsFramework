@@ -1,0 +1,16 @@
+<h1>Details Element : </h1>
+<div *ngIf="element!==undefined; else UndefinedNote">
+  <ul>
+    <li><b>Designation: </b>{{element.designation}}</li>
+    <li><b>Description: </b>{{element.description}}</li>
+    <li><b>Commentaires: </b>{{element.commentaire}}</li>
+    <li><b>Valeur: </b>{{element.valeur}}</li>
+  </ul>
+  <button mat-raised-button color="accent" (click)="goBack()">Back</button>
+  <button mat-raised-button color="primary" routerLink="/edit-element/{{element.id}}">Edit</button>
+</div>
+<ng-template #UndefinedNote>
+  <p>Loading...</p>
+  <div class="spinner-border text-primary" role="status">
+  </div>
+</ng-template>

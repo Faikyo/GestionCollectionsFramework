@@ -1,0 +1,35 @@
+<div class="mx-3" *ngIf="ready">
+  <h1>Elements</h1>
+  <mat-table [dataSource]="elements" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="designation">
+      <mat-header-cell *matHeaderCellDef>Designation</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.designation | slice:0:20 }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="collection">
+      <mat-header-cell *matHeaderCellDef>Collection</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.collection }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-raised-button color="primary" [routerLink]="['/element/',element.id]">Show</button>
+        <button mat-raised-button color="accent" [routerLink]="['/edit-element', element.id]">Edit</button>
+        <button mat-raised-button color="warn" (click)="delete(element.id)">Delete</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="arrayColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: arrayColumns;"></mat-row>
+  </mat-table>
+</div>
+<div *ngIf="!ready">
+  <p>Loading...</p>
+  <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+</div>
